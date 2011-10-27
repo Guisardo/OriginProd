@@ -64,8 +64,8 @@
     <Compile Include="Importer\AFA\Entities\Partido.vb" />
     <Compile Include="Importer\AFA\Entities\Torneo.vb" />
     <Compile Include="Importer\AFA\Enums\Campeonatos.vb" />
-    <Compile Include="Importer\AFA\Managers\Torneos.vb" />
-    <Compile Include="Importer\AFA\Managers\Parser.vb" />
+    <Compile Include="Importer\AFA\Enums\Torneos.vb" />
+    <Compile Include="Importer\Managers\Parser.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
