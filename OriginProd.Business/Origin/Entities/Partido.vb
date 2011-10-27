@@ -14,6 +14,16 @@ Namespace Origin.Entities
             End Set
         End Property
 
+        Private m_Fecha As Int32
+        Public Property Fecha() As Int32
+            Get
+                Return m_Fecha
+            End Get
+            Set(ByVal value As Int32)
+                m_Fecha = value
+            End Set
+        End Property
+
         Private m_Local As String
         Public Property Local() As String
             Get

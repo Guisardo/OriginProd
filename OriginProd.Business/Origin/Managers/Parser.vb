@@ -14,13 +14,15 @@ Namespace Origin.Managers
 
             fechaAfa = Regex.Match(torneoAfa, String.Format("<td colspan=""2"" align=""center"">Fecha {0}</td>.+?</table>", fecha), RegexOptions.Singleline).Value
 
+            Dim newTorneo As New Entities.Torneo(torneo, campeonato, anio)
             Dim RegexObj As New Regex("<td class=""local"">(?<local>.+?)</td>.+?<td class=""gol"">(?<local_goles>.+?)</td>.+?<td class=""gol"">(?<visitante_goles>.+?)</td>.+?<td class=""visitante"">(?<visitante>.+?)</td>.+?<td class=""estado""><strong>(?<estado>.+?)</strong></td>.+?<td class=""estadio"">(?<estadio>.+?)</td>.+?<td class=""arbitro"">(?<arbitro>.+?)</td>", RegexOptions.Singleline)
             Dim MatchesResults As MatchCollection = RegexObj.Matches(fechaAfa)
             For Each MatchResult As Match In MatchesResults
                 If MatchResult.Groups("estado").Value = "Finalizado" Then
                     Dim newPartido As New Entities.Partido()
-                    newPartido.Torneo = New Entities.Torneo(torneo, campeonato, anio)
 
+                    newPartido.Torneo = newTorneo
+                    newPartido.Fecha = fecha
                     newPartido.Local = MatchResult.Groups("local").Value
                     newPartido.Visitante = MatchResult.Groups("visitante").Value
                     newPartido.GolesLocal = Convert.ToInt32(MatchResult.Groups("local_goles").Value)
