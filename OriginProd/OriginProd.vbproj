@@ -133,6 +133,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OriginProd.Business\OriginProd.Business.vbproj">
+      <Project>{A0FA8A0A-1F8E-4363-8FCB-BA1351E94DCF}</Project>
+      <Name>OriginProd.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

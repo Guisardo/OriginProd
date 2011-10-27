@@ -3,14 +3,37 @@ Option Strict On
 
 Imports System.Net
 Imports System.IO
+Imports System.Text.RegularExpressions
 
 Namespace Origin.Managers
     Public Class Parser
         Public Shared Function ParseFecha(ByVal fecha As Int32, ByVal torneo As Enums.Torneos, ByVal campeonato As Enums.Campeonatos, ByVal anio As Int32) As List(Of Entities.Partido)
+            Dim result As New List(Of Entities.Partido)()
+            Dim torneoAfa As String = GetResultadosAfa(torneo, campeonato, anio)
+            Dim fechaAfa As String
 
+            fechaAfa = Regex.Match(torneoAfa, String.Format("<td colspan=""2"" align=""center"">Fecha {0}</td>.+?</table>", fecha), RegexOptions.Singleline).Value
+
+            Dim RegexObj As New Regex("<td class=""local"">(?<local>.+?)</td>.+?<td class=""gol"">(?<local_goles>.+?)</td>.+?<td class=""gol"">(?<visitante_goles>.+?)</td>.+?<td class=""visitante"">(?<visitante>.+?)</td>.+?<td class=""estado""><strong>(?<estado>.+?)</strong></td>.+?<td class=""estadio"">(?<estadio>.+?)</td>.+?<td class=""arbitro"">(?<arbitro>.+?)</td>", RegexOptions.Singleline)
+            Dim MatchesResults As MatchCollection = RegexObj.Matches(fechaAfa)
+            For Each MatchResult As Match In MatchesResults
+                If MatchResult.Groups("estado").Value = "Finalizado" Then
+                    Dim newPartido As New Entities.Partido()
+                    newPartido.Torneo = New Entities.Torneo(torneo, campeonato, anio)
+
+                    newPartido.Local = MatchResult.Groups("local").Value
+                    newPartido.Visitante = MatchResult.Groups("visitante").Value
+                    newPartido.GolesLocal = Convert.ToInt32(MatchResult.Groups("local_goles").Value)
+                    newPartido.GolesVisitante = Convert.ToInt32(MatchResult.Groups("visitante_goles").Value)
+                    newPartido.Estadio = MatchResult.Groups("estadio").Value
+                    newPartido.Arbitros = MatchResult.Groups("arbitro").Value
+                    result.Add(newPartido)
+                End If
+            Next
+            Return result
         End Function
 
-        Public Shared Function GetResultadosAfa(ByVal torneo As Enums.Torneos, ByVal campeonato As Enums.Campeonatos, ByVal anio As Int32) As String
+        Private Shared Function GetResultadosAfa(ByVal torneo As Enums.Torneos, ByVal campeonato As Enums.Campeonatos, ByVal anio As Int32) As String
             Dim result As String = String.Empty
 
             Dim division As String = torneo.ToString()
@@ -41,7 +64,7 @@ Namespace Origin.Managers
                     'Obtengo la cabecera
                     loWebResponse = DirectCast(loHttp.GetResponse(), HttpWebResponse)
                     'Obtengo la respuesta
-                    loResponseStream = New StreamReader(loWebResponse.GetResponseStream())
+                    loResponseStream = New StreamReader(loWebResponse.GetResponseStream(), Text.Encoding.GetEncoding("latin1"))
                     result = loResponseStream.ReadToEnd()
                 Catch
                     If Not Err.Description.Contains("(50") Then

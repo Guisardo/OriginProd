@@ -14,5 +14,10 @@ Namespace Origin.Entities
             End Set
         End Property
 
+        Public Sub New()
+        End Sub
+        Public Sub New(ByVal campeonato As Enums.Campeonatos, ByVal anio As Int32)
+            m_Description = campeonato.ToString() & anio.ToString()
+        End Sub
     End Class
 End Namespace

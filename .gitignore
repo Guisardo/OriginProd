@@ -1,3 +1,5 @@
 
 OriginProd.suo
 *.user
+bin
+obj
