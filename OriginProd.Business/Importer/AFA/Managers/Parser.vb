@@ -5,7 +5,7 @@ Imports System.Net
 Imports System.IO
 Imports System.Text.RegularExpressions
 
-Namespace Origin.Managers
+Namespace Importer.AFA.Managers
     Public Class Parser
         Public Shared Function ParseFecha(ByVal fecha As Int32, ByVal torneo As Enums.Torneos, ByVal campeonato As Enums.Campeonatos, ByVal anio As Int32) As List(Of Entities.Partido)
             Dim result As New List(Of Entities.Partido)()

@@ -60,12 +60,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Origin\Entities\Campeonato.vb" />
-    <Compile Include="Origin\Entities\Partido.vb" />
-    <Compile Include="Origin\Entities\Torneo.vb" />
-    <Compile Include="Origin\Enums\Campeonatos.vb" />
-    <Compile Include="Origin\Enums\Torneos.vb" />
-    <Compile Include="Origin\Managers\Parser.vb" />
+    <Compile Include="Importer\AFA\Entities\Campeonato.vb" />
+    <Compile Include="Importer\AFA\Entities\Partido.vb" />
+    <Compile Include="Importer\AFA\Entities\Torneo.vb" />
+    <Compile Include="Importer\AFA\Enums\Campeonatos.vb" />
+    <Compile Include="Importer\AFA\Managers\Torneos.vb" />
+    <Compile Include="Importer\AFA\Managers\Parser.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -102,8 +102,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Destination\Entities\" />
-    <Folder Include="Destination\Managers\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Managers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 Option Strict On
 
-Namespace Origin.Entities
+Namespace Importer.AFA.Entities
     Public Class Partido
 
         Private m_Torneo As Torneo

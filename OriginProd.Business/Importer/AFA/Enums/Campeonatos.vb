@@ -1,7 +1,7 @@
 ﻿Option Explicit On
 Option Strict On
 
-Namespace Origin.Enums
+Namespace Importer.AFA.Enums
     Public Enum Campeonatos
         clausura
         apertura
